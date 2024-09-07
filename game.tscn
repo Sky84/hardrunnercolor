@@ -1,0 +1,103 @@
+[gd_scene load_steps=13 format=3 uid="uid://qt3si1sjq3dw"]
+
+[ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
+[ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
+[ext_resource type="Shader" path="res://game.gdshader" id="3_echh8"]
+[ext_resource type="Texture2D" uid="uid://dm1bshdnfroye" path="res://Assets/Backgrounds/background2.png" id="3_lxvm8"]
+[ext_resource type="Script" path="res://GameRules.gd" id="5_birrg"]
+[ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
+[ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
+
+[sub_resource type="Gradient" id="Gradient_y1ho5"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.654902, 0.109804, 0.419608, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ljq0m"]
+gradient = SubResource("Gradient_y1ho5")
+width = 1
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cfxj5"]
+shader = ExtResource("3_echh8")
+shader_parameter/color = Color(0.266667, 0.0352941, 0.235294, 1)
+shader_parameter/OCTAVES = 2
+shader_parameter/enable_pixelation = false
+shader_parameter/pixelation_amount = 150
+shader_parameter/fog_direction = Vector2(1, 0)
+shader_parameter/scroll_noise_tex = true
+shader_parameter/noise_scroll_direction = Vector2(1, 0)
+
+[sub_resource type="Gradient" id="Gradient_snvpx"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_po6bg"]
+gradient = SubResource("Gradient_snvpx")
+
+[node name="Game" type="Node2D"]
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("1_b7alc")
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.3, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Background0" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+use_parent_material = true
+scale = Vector2(1920, 1080)
+texture = SubResource("GradientTexture1D_ljq0m")
+centered = false
+
+[node name="Fog" type="Sprite2D" parent="ParallaxBackground"]
+material = SubResource("ShaderMaterial_cfxj5")
+position = Vector2(960, 539.75)
+scale = Vector2(7.5, 1080.5)
+texture = SubResource("GradientTexture1D_po6bg")
+
+[node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.4, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Background1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+use_parent_material = true
+texture = ExtResource("2_2tqrj")
+centered = false
+
+[node name="ParallaxLayer3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 1)
+motion_mirroring = Vector2(1920, 0)
+
+[node name="Background2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
+use_parent_material = true
+texture = ExtResource("3_lxvm8")
+centered = false
+
+[node name="GameRules" type="Node2D" parent="."]
+script = ExtResource("5_birrg")
+speed = Vector2(-500, 0)
+
+[node name="PlatformSpawner" type="Node2D" parent="." node_paths=PackedStringArray("platforms")]
+use_parent_material = true
+script = ExtResource("6_vnohe")
+platforms = [NodePath("Platforms/Platform"), NodePath("Platforms/Platform2"), NodePath("Platforms/Platform3"), NodePath("Platforms/Platform4")]
+
+[node name="Platforms" type="Node2D" parent="PlatformSpawner"]
+use_parent_material = true
+position = Vector2(0, 962)
+
+[node name="Platform" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
+use_parent_material = true
+platform_type = "Red"
+
+[node name="Platform2" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
+use_parent_material = true
+position = Vector2(629, 0)
+platform_type = "Blue"
+
+[node name="Platform3" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
+use_parent_material = true
+position = Vector2(1258, 0)
+platform_type = "Yellow"
+
+[node name="Platform4" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
+use_parent_material = true
+position = Vector2(1887, 0)
+platform_type = "Green"

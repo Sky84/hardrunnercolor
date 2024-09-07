@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://n1mb8ltok4i6"]
+
+[ext_resource type="Script" path="res://obstacle.gd" id="1_gipju"]
+[ext_resource type="Texture2D" uid="uid://cuagi68m35cdd" path="res://Assets/Obstacles/spike.png" id="2_wex5i"]
+
+[node name="Obstacle" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_obstacle")]
+script = ExtResource("1_gipju")
+sprite_obstacle = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_wex5i")
+centered = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
