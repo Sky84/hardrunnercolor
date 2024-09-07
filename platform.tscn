@@ -55,6 +55,8 @@ shader_parameter/glow_radius = 1.0
 size = Vector2(629, 299)
 
 [node name="Platform" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_platform")]
+z_index = 1
+collision_layer = 2
 script = ExtResource("1_uf361")
 sprite_platform = NodePath("SpritePlatform")
 
@@ -65,6 +67,5 @@ texture = ExtResource("2_caafi")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(314.5, 149.5)
 shape = SubResource("RectangleShape2D_fqree")
