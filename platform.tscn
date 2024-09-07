@@ -1,7 +1,55 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwomi1d1tdxqo"]
+[gd_scene load_steps=6 format=3 uid="uid://cwomi1d1tdxqo"]
 
 [ext_resource type="Script" path="res://Platform.gd" id="1_uf361"]
 [ext_resource type="Texture2D" uid="uid://c3052myjyt0y" path="res://Assets/Platforms/redplatform.png" id="2_caafi"]
+
+[sub_resource type="Shader" id="Shader_t5vik"]
+code = "shader_type canvas_item;
+
+
+
+uniform vec4 glow_color : source_color;
+
+uniform float glow_power: hint_range(0.0, 8.0, 0.1) = 2.0;
+
+uniform float glow_shift: hint_range(0.0, 10.0, 0.1) = 1.0;
+
+uniform float glow_radius: hint_range(1.0, 10.0, 1.0) = 1.0;
+
+
+
+void fragment() {
+
+	vec4 glow = vec4(0.0);
+
+	float count = 0.0;
+
+	for (float x = -glow_radius; x <= glow_radius; x += 1.0) {
+
+		for (float y = -glow_radius; y <= glow_radius; y += 1.0) {
+
+			vec2 offset = vec2(x, y) * glow_shift * TEXTURE_PIXEL_SIZE;
+
+			glow += texture(TEXTURE, UV + offset) * glow_color;
+
+			count += 1.0;
+
+		}
+
+	}
+
+	glow *= glow_power / count;
+
+	COLOR = mix(texture(TEXTURE, UV), glow, glow.a);
+
+} "
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_to0rx"]
+shader = SubResource("Shader_t5vik")
+shader_parameter/glow_color = Color(0, 0.678431, 0, 1)
+shader_parameter/glow_power = 2.0
+shader_parameter/glow_shift = 1.0
+shader_parameter/glow_radius = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fqree"]
 size = Vector2(629, 299)
@@ -11,11 +59,12 @@ script = ExtResource("1_uf361")
 sprite_platform = NodePath("SpritePlatform")
 
 [node name="SpritePlatform" type="Sprite2D" parent="."]
-use_parent_material = true
+material = SubResource("ShaderMaterial_to0rx")
 position = Vector2(-108, -108)
 texture = ExtResource("2_caafi")
 centered = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(314.5, 149.5)
 shape = SubResource("RectangleShape2D_fqree")

@@ -17,6 +17,11 @@ const platform_scenes = {
 		if sprite_platform and value:
 			_platform_type = value.to_lower();
 			sprite_platform.texture = platform_scenes[_platform_type];
+			# duplicate material to lose ref
+			sprite_platform.material = sprite_platform.material.duplicate();
+			# set shader parameters glow color by platform type
+			sprite_platform.material.set_shader_parameter("glow_color", Color(_platform_type));
+			
 
 var _platform_type: String;
 

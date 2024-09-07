@@ -1,9 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=15 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
-[ext_resource type="Shader" path="res://game.gdshader" id="3_echh8"]
+[ext_resource type="Shader" path="res://fog.gdshader" id="2_jebvo"]
 [ext_resource type="Texture2D" uid="uid://dm1bshdnfroye" path="res://Assets/Backgrounds/background2.png" id="3_lxvm8"]
+[ext_resource type="Shader" path="res://bloom.gdshader" id="4_gsxbt"]
 [ext_resource type="Script" path="res://GameRules.gd" id="5_birrg"]
 [ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
@@ -17,12 +18,12 @@ gradient = SubResource("Gradient_y1ho5")
 width = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfxj5"]
-shader = ExtResource("3_echh8")
+shader = ExtResource("2_jebvo")
 shader_parameter/color = Color(0.266667, 0.0352941, 0.235294, 1)
 shader_parameter/OCTAVES = 2
 shader_parameter/enable_pixelation = false
 shader_parameter/pixelation_amount = 150
-shader_parameter/fog_direction = Vector2(1, 0)
+shader_parameter/fog_direction = Vector2(3, 0)
 shader_parameter/scroll_noise_tex = true
 shader_parameter/noise_scroll_direction = Vector2(1, 0)
 
@@ -30,6 +31,13 @@ shader_parameter/noise_scroll_direction = Vector2(1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_po6bg"]
 gradient = SubResource("Gradient_snvpx")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8kf8t"]
+shader = ExtResource("4_gsxbt")
+shader_parameter/glow_color = Color(1, 1, 1, 1)
+shader_parameter/glow_power = 2.0
+shader_parameter/glow_shift = 5.0
+shader_parameter/glow_radius = 1.0
 
 [node name="Game" type="Node2D"]
 
@@ -66,7 +74,7 @@ motion_scale = Vector2(0.5, 1)
 motion_mirroring = Vector2(1920, 0)
 
 [node name="Background2" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer3"]
-use_parent_material = true
+material = SubResource("ShaderMaterial_8kf8t")
 texture = ExtResource("3_lxvm8")
 centered = false
 
@@ -75,29 +83,23 @@ script = ExtResource("5_birrg")
 speed = Vector2(-500, 0)
 
 [node name="PlatformSpawner" type="Node2D" parent="." node_paths=PackedStringArray("platforms")]
-use_parent_material = true
 script = ExtResource("6_vnohe")
 platforms = [NodePath("Platforms/Platform"), NodePath("Platforms/Platform2"), NodePath("Platforms/Platform3"), NodePath("Platforms/Platform4")]
 
 [node name="Platforms" type="Node2D" parent="PlatformSpawner"]
-use_parent_material = true
 position = Vector2(0, 962)
 
 [node name="Platform" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-use_parent_material = true
 platform_type = "Red"
 
 [node name="Platform2" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-use_parent_material = true
 position = Vector2(629, 0)
 platform_type = "Blue"
 
 [node name="Platform3" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-use_parent_material = true
 position = Vector2(1258, 0)
 platform_type = "Yellow"
 
 [node name="Platform4" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-use_parent_material = true
 position = Vector2(1887, 0)
 platform_type = "Green"
