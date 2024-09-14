@@ -9,7 +9,6 @@ size = Vector2(550, 144)
 [node name="Obstacle" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_obstacle")]
 script = ExtResource("1_gipju")
 sprite_obstacle = NodePath("Sprite2D")
-obstacle_type = "Spike"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, -16)

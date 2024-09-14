@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=17 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
+[ext_resource type="PackedScene" uid="uid://cdm51b5aut1my" path="res://Player.tscn.tscn" id="10_27v1q"]
 
 [sub_resource type="Gradient" id="Gradient_y1ho5"]
 offsets = PackedFloat32Array(1)
@@ -105,3 +106,6 @@ platform_type = "Yellow"
 [node name="Platform4" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 position = Vector2(1887, 0)
 platform_type = "Green"
+
+[node name="Player" parent="." instance=ExtResource("10_27v1q")]
+position = Vector2(142, 666)

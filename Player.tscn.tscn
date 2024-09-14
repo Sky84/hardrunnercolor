@@ -1,0 +1,123 @@
+[gd_scene load_steps=13 format=3 uid="uid://cdm51b5aut1my"]
+
+[ext_resource type="Script" path="res://player.gd" id="1_di760"]
+
+[sub_resource type="Gradient" id="Gradient_sjbpt"]
+offsets = PackedFloat32Array(0, 0.720238, 0.803571)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0.160784, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tmweg"]
+gradient = SubResource("Gradient_sjbpt")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_66kqx"]
+offsets = PackedFloat32Array(0, 0, 0.803571)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0.388235, 0.768627, 0.984314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xgqhn"]
+gradient = SubResource("Gradient_66kqx")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_f531k"]
+offsets = PackedFloat32Array(0, 0, 0.803571)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_pbuon"]
+gradient = SubResource("Gradient_f531k")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_3ra3u"]
+offsets = PackedFloat32Array(0, 0, 0.785714)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k3pm0"]
+gradient = SubResource("Gradient_3ra3u")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="Gradient" id="Gradient_6rsjk"]
+offsets = PackedFloat32Array(0, 0, 0.803571)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1, 1, 0.160784, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ol1o6"]
+gradient = SubResource("Gradient_6rsjk")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_25m41"]
+size = Vector2(112, 112)
+
+[node name="Player" type="CharacterBody2D"]
+floor_stop_on_slope = false
+floor_constant_speed = true
+script = ExtResource("1_di760")
+
+[node name="Sprites" type="Node2D" parent="."]
+position = Vector2(-56, -56)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites"]
+scale = Vector2(28, 28)
+texture = SubResource("GradientTexture2D_tmweg")
+centered = false
+
+[node name="SpriteBlue" type="Sprite2D" parent="Sprites"]
+scale = Vector2(28, 6.5)
+texture = SubResource("GradientTexture2D_xgqhn")
+centered = false
+
+[node name="SpriteGreen" type="Sprite2D" parent="Sprites"]
+position = Vector2(93, 0)
+scale = Vector2(4.75, 28)
+texture = SubResource("GradientTexture2D_pbuon")
+centered = false
+
+[node name="SpriteYellow" type="Sprite2D" parent="Sprites"]
+position = Vector2(0, 96)
+scale = Vector2(28, 4.00001)
+texture = SubResource("GradientTexture2D_k3pm0")
+centered = false
+
+[node name="SpriteRed" type="Sprite2D" parent="Sprites"]
+scale = Vector2(5.25, 28)
+texture = SubResource("GradientTexture2D_ol1o6")
+centered = false
+
+[node name="Raycasts" type="Node2D" parent="."]
+position = Vector2(-56, -56)
+
+[node name="YellowRayCast2D" type="RayCast2D" parent="Raycasts"]
+position = Vector2(56, 115)
+target_position = Vector2(0, 30)
+
+[node name="RedRayCast2D2" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, 59)
+target_position = Vector2(-30, 0)
+
+[node name="BlueRayCast2D3" type="RayCast2D" parent="Raycasts"]
+position = Vector2(56, 0)
+target_position = Vector2(0, -30)
+
+[node name="GreenRayCast2D4" type="RayCast2D" parent="Raycasts"]
+position = Vector2(112, 59)
+target_position = Vector2(30, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_25m41")
