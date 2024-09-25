@@ -1,12 +1,14 @@
-[gd_scene load_steps=4 format=3 uid="uid://n1mb8ltok4i6"]
+[gd_scene load_steps=5 format=3 uid="uid://n1mb8ltok4i6"]
 
 [ext_resource type="Script" path="res://obstacle.gd" id="1_gipju"]
+[ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="1_k8mah"]
 [ext_resource type="Texture2D" uid="uid://cuagi68m35cdd" path="res://Assets/Obstacles/spike.png" id="2_wex5i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvph1"]
 size = Vector2(550, 144)
 
 [node name="Obstacle" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_obstacle")]
+physics_material_override = ExtResource("1_k8mah")
 script = ExtResource("1_gipju")
 sprite_obstacle = NodePath("Sprite2D")
 

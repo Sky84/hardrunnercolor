@@ -18,7 +18,9 @@ func _physics_process(delta):
 		platform.global_position.x += game_rules.speed.x * delta;
 		var platform_max_right = platform.global_position.x + platform.platform_width;
 		if platform_max_right < 0:
-			platform.global_position.x = get_viewport_rect().size.x;
+			# find the rightest platform
+			var right_most_platform_X: int = platforms.map(func(p): return p.position.x + p.platform_width).max();
+			platform.global_position.x = right_most_platform_X;
 			_on_platform_replaced(platform);
 	for obstacle in _obstacles:
 		obstacle.global_position.x += game_rules.speed.x * delta;

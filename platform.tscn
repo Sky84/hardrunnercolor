@@ -56,7 +56,6 @@ size = Vector2(629, 299)
 
 [node name="Platform" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_platform")]
 z_index = 1
-collision_layer = 2
 script = ExtResource("1_uf361")
 sprite_platform = NodePath("SpritePlatform")
 

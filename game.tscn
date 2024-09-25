@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=18 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
+[ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="10_1qxda"]
 [ext_resource type="PackedScene" uid="uid://cdm51b5aut1my" path="res://Player.tscn.tscn" id="10_27v1q"]
 
 [sub_resource type="Gradient" id="Gradient_y1ho5"]
@@ -83,6 +84,8 @@ centered = false
 [node name="GameRules" type="Node2D" parent="."]
 script = ExtResource("5_birrg")
 speed = Vector2(-500, 0)
+speed_increase = Vector2(-10, 0)
+gravity = Vector2(0, 3000)
 
 [node name="PlatformSpawner" type="Node2D" parent="." node_paths=PackedStringArray("platforms")]
 script = ExtResource("6_vnohe")
@@ -93,19 +96,27 @@ platforms = [NodePath("Platforms/Platform"), NodePath("Platforms/Platform2"), No
 position = Vector2(0, 962)
 
 [node name="Platform" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
+physics_material_override = ExtResource("10_1qxda")
 platform_type = "Red"
 
 [node name="Platform2" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 position = Vector2(629, 0)
+physics_material_override = ExtResource("10_1qxda")
 platform_type = "Blue"
 
 [node name="Platform3" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 position = Vector2(1258, 0)
+physics_material_override = ExtResource("10_1qxda")
 platform_type = "Yellow"
 
 [node name="Platform4" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 position = Vector2(1887, 0)
+physics_material_override = ExtResource("10_1qxda")
 platform_type = "Green"
 
 [node name="Player" parent="." instance=ExtResource("10_27v1q")]
-position = Vector2(142, 666)
+position = Vector2(250, 666)
+floor_constant_speed = false
+floor_block_on_wall = false
+platform_on_leave = 2
+jump_force = 1000.0

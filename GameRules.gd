@@ -1,13 +1,20 @@
 extends Node2D
 class_name GameRules
 
+@export var time_s_before_increase_speed: int = 1;
 @export var speed: Vector2;
+@export var speed_increase: Vector2;
+@export var gravity: Vector2;
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	# increase speed by speed_increase every 10 seconds
+	var _timer = Timer.new();
+	_timer.wait_time = time_s_before_increase_speed;
+	_timer.autostart = true;
+	add_child(_timer);
+	_timer.timeout.connect(_on_timer_timeout);
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
+func _on_timer_timeout():
+	speed += speed_increase;
+	print(speed)
