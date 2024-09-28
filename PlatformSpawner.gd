@@ -31,7 +31,7 @@ func _physics_process(delta):
 
 func _on_platform_replaced(_platform: AnimatableBody2D):
 	_platform.platform_type = PLATFORM_TYPE[randi() % PLATFORM_TYPE.size()];
-	var _with_obstacle = randi_range(0, 1) == 0;
+	var _with_obstacle = randi_range(0, 2) == 0;
 	if _with_obstacle:
 		var _obstacle_scene = obstacles_scenes[randi() % obstacles_scenes.size()];
 		var _obstacle_instance = _obstacle_scene.instantiate();

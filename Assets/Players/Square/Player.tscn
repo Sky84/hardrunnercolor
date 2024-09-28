@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://cdm51b5aut1my"]
 
-[ext_resource type="Script" path="res://player.gd" id="1_di760"]
+[ext_resource type="Script" path="res://Assets/player.gd" id="1_wkp3d"]
 
 [sub_resource type="Gradient" id="Gradient_sjbpt"]
 offsets = PackedFloat32Array(0, 0.720238, 0.803571)
@@ -65,10 +65,10 @@ fill_to = Vector2(0, 0)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_25m41"]
 size = Vector2(112, 112)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Square" type="CharacterBody2D"]
 floor_stop_on_slope = false
 floor_constant_speed = true
-script = ExtResource("1_di760")
+script = ExtResource("1_wkp3d")
 
 [node name="Sprites" type="Node2D" parent="."]
 position = Vector2(-56, -56)

@@ -1,21 +1,167 @@
-[gd_scene load_steps=5 format=3 uid="uid://n1mb8ltok4i6"]
+[gd_scene load_steps=23 format=3 uid="uid://n1mb8ltok4i6"]
 
 [ext_resource type="Script" path="res://obstacle.gd" id="1_gipju"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="1_k8mah"]
-[ext_resource type="Texture2D" uid="uid://cuagi68m35cdd" path="res://Assets/Obstacles/spike.png" id="2_wex5i"]
+[ext_resource type="Texture2D" uid="uid://bbfjho42bvy37" path="res://Assets/Obstacles/CrateIdle.png" id="3_7uknn"]
+[ext_resource type="Texture2D" uid="uid://chyjn6mptdkyu" path="res://Assets/Obstacles/LaserActivatedBaseBottom.png" id="3_nin25"]
+[ext_resource type="Texture2D" uid="uid://o2yi3f346s4h" path="res://Assets/Obstacles/LaserActivatedBaseTop.png" id="3_o5kgx"]
+[ext_resource type="Texture2D" uid="uid://bnkedsykfggh5" path="res://Assets/Obstacles/LaserActivatedCenter.png" id="4_cwn3r"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dvph1"]
-size = Vector2(550, 144)
+size = Vector2(268, 62)
 
-[node name="Obstacle" type="AnimatableBody2D" node_paths=PackedStringArray("sprite_obstacle")]
+[sub_resource type="AtlasTexture" id="AtlasTexture_sqi7f"]
+atlas = ExtResource("3_o5kgx")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_prf4t"]
+atlas = ExtResource("3_o5kgx")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vvesg"]
+atlas = ExtResource("3_o5kgx")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_51axi"]
+atlas = ExtResource("3_o5kgx")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nknyx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sqi7f")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_prf4t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vvesg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_51axi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eydek"]
+atlas = ExtResource("4_cwn3r")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_46ch0"]
+atlas = ExtResource("4_cwn3r")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fg7sv"]
+atlas = ExtResource("4_cwn3r")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w3f8s"]
+atlas = ExtResource("4_cwn3r")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ujrv1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eydek")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_46ch0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fg7sv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w3f8s")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_oi6ne"]
+atlas = ExtResource("3_nin25")
+region = Rect2(0, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vcu18"]
+atlas = ExtResource("3_nin25")
+region = Rect2(32, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_j2280"]
+atlas = ExtResource("3_nin25")
+region = Rect2(64, 0, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1d3en"]
+atlas = ExtResource("3_nin25")
+region = Rect2(96, 0, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4j8x0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_oi6ne")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vcu18")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_j2280")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1d3en")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Obstacle" type="AnimatableBody2D"]
 physics_material_override = ExtResource("1_k8mah")
 script = ExtResource("1_gipju")
-sprite_obstacle = NodePath("Sprite2D")
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(0, -16)
-texture = ExtResource("2_wex5i")
+metadata/_edit_horizontal_guides_ = [-58.0]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(8, 1)
+position = Vector2(64, -19)
 shape = SubResource("RectangleShape2D_dvph1")
+
+[node name="BlocBottom" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-101, -26)
+scale = Vector2(4, 4)
+texture = ExtResource("3_7uknn")
+region_enabled = true
+region_rect = Rect2(44.9827, 16.1057, 16.1506, 15.838)
+
+[node name="BlocTop" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(231, -26)
+scale = Vector2(4, 4)
+texture = ExtResource("3_7uknn")
+region_enabled = true
+region_rect = Rect2(44.9827, 16.1057, 16.1506, 15.838)
+
+[node name="AnimatedSprites" type="Node2D" parent="."]
+texture_filter = 1
+position = Vector2(197, -29)
+
+[node name="AnimatedSprite2DTop" type="AnimatedSprite2D" parent="AnimatedSprites"]
+position = Vector2(-30, 0)
+rotation = 1.5708
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_nknyx")
+
+[node name="AnimatedSprite2DCenter" type="AnimatedSprite2D" parent="AnimatedSprites"]
+texture_repeat = 3
+position = Vector2(-131.78, -5.76028e-06)
+rotation = 1.5708
+scale = Vector2(4, 8.77751)
+sprite_frames = SubResource("SpriteFrames_ujrv1")
+
+[node name="AnimatedSprite2DBottom" type="AnimatedSprite2D" parent="AnimatedSprites"]
+position = Vector2(-234, 0)
+rotation = 1.5708
+scale = Vector2(4, 4)
+sprite_frames = SubResource("SpriteFrames_4j8x0")

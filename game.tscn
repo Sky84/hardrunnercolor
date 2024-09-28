@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=43 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -7,14 +7,16 @@
 [ext_resource type="Shader" path="res://bloom.gdshader" id="4_gsxbt"]
 [ext_resource type="Script" path="res://GameRules.gd" id="5_birrg"]
 [ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
+[ext_resource type="Texture2D" uid="uid://by0cje77m7h1p" path="res://Assets/Players/SimpleCharacter/PlayerSheet.png" id="7_fgkuc"]
+[ext_resource type="Script" path="res://simple_character.gd" id="7_p77bl"]
+[ext_resource type="Shader" path="res://player_color.gdshader" id="7_r0aca"]
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="10_1qxda"]
-[ext_resource type="PackedScene" uid="uid://cdm51b5aut1my" path="res://Player.tscn.tscn" id="10_27v1q"]
 
 [sub_resource type="Gradient" id="Gradient_y1ho5"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.654902, 0.109804, 0.419608, 1)
+colors = PackedColorArray(0, 0.364706, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ljq0m"]
 gradient = SubResource("Gradient_y1ho5")
@@ -22,7 +24,7 @@ width = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cfxj5"]
 shader = ExtResource("2_jebvo")
-shader_parameter/color = Color(0.266667, 0.0352941, 0.235294, 1)
+shader_parameter/color = Color(0, 0.67451, 1, 1)
 shader_parameter/OCTAVES = 2
 shader_parameter/enable_pixelation = false
 shader_parameter/pixelation_amount = 150
@@ -41,6 +43,162 @@ shader_parameter/glow_color = Color(1, 1, 1, 1)
 shader_parameter/glow_power = 2.0
 shader_parameter/glow_shift = 5.0
 shader_parameter/glow_radius = 1.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gxq0g"]
+size = Vector2(55, 55)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_du0mu"]
+size = Vector2(55, 164)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vpbo5"]
+shader = ExtResource("7_r0aca")
+shader_parameter/current_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_phto1"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(0, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qro8g"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(96, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_573g3"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(192, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h3mmx"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(288, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sa2j"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(384, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_gxdjn"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(480, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_sg52w"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(576, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r8044"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(672, 252, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_27lho"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(0, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tmapx"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(96, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_347u7"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(192, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1rnx"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(288, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n7ab"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(384, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7iak8"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(480, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pm3kk"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(576, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6nlfc"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(672, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dsobg"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(768, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6r32g"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(864, 1596, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jrk5a"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(960, 1596, 96, 84)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nai62"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_phto1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qro8g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_573g3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h3mmx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sa2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_gxdjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_sg52w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r8044")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_27lho")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tmapx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_347u7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1rnx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n7ab")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7iak8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pm3kk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6nlfc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dsobg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6r32g")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jrk5a")
+}],
+"loop": true,
+"name": &"jump",
+"speed": 11.0
+}]
 
 [node name="Game" type="Node2D"]
 
@@ -68,6 +226,7 @@ motion_scale = Vector2(0.4, 1)
 motion_mirroring = Vector2(1920, 0)
 
 [node name="Background1" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer2"]
+modulate = Color(0, 0.67451, 1, 1)
 use_parent_material = true
 texture = ExtResource("2_2tqrj")
 centered = false
@@ -86,6 +245,24 @@ script = ExtResource("5_birrg")
 speed = Vector2(-500, 0)
 speed_increase = Vector2(-10, 0)
 gravity = Vector2(0, 3000)
+colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 0, 1)])
+
+[node name="Player" type="CharacterBody2D" parent="."]
+texture_filter = 1
+position = Vector2(312, 766)
+script = ExtResource("7_p77bl")
+rectangle_jump_collision = SubResource("RectangleShape2D_gxq0g")
+rectangle_stand_collision = SubResource("RectangleShape2D_du0mu")
+jump_force = 1200.0
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Player"]
+material = SubResource("ShaderMaterial_vpbo5")
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_nai62")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(7.5, 107)
+shape = SubResource("RectangleShape2D_du0mu")
 
 [node name="PlatformSpawner" type="Node2D" parent="." node_paths=PackedStringArray("platforms")]
 script = ExtResource("6_vnohe")
@@ -97,7 +274,7 @@ position = Vector2(0, 962)
 
 [node name="Platform" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 physics_material_override = ExtResource("10_1qxda")
-platform_type = "Red"
+platform_type = ""
 
 [node name="Platform2" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 position = Vector2(629, 0)
@@ -113,10 +290,3 @@ platform_type = "Yellow"
 position = Vector2(1887, 0)
 physics_material_override = ExtResource("10_1qxda")
 platform_type = "Green"
-
-[node name="Player" parent="." instance=ExtResource("10_27v1q")]
-position = Vector2(250, 666)
-floor_constant_speed = false
-floor_block_on_wall = false
-platform_on_leave = 2
-jump_force = 1000.0

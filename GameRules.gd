@@ -5,6 +5,7 @@ class_name GameRules
 @export var speed: Vector2;
 @export var speed_increase: Vector2;
 @export var gravity: Vector2;
+@export var colors: Array[Color];
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -17,4 +18,3 @@ func _ready():
 
 func _on_timer_timeout():
 	speed += speed_increase;
-	print(speed)
