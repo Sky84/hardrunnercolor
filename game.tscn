@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=45 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -14,9 +14,16 @@
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="10_1qxda"]
 
+[sub_resource type="Gradient" id="Gradient_wht7d"]
+offsets = PackedFloat32Array(0, 0.136905, 0.303571, 0.488095, 0.595238, 0.732143, 0.892857, 1)
+colors = PackedColorArray(0, 0.364706, 1, 1, 0.418063, 0.621324, 1, 1, 0.850754, 0.889904, 0.862696, 1, 0.974512, 0.628761, 3.85046e-07, 1, 0.917179, 0, 0.266607, 1, 0, 0.0218256, 0.070755, 1, 0, 0.0235294, 0.0705882, 1, 0, 0.364706, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_s38cj"]
+gradient = SubResource("Gradient_wht7d")
+
 [sub_resource type="Gradient" id="Gradient_y1ho5"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0, 0.364706, 1, 1)
+colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ljq0m"]
 gradient = SubResource("Gradient_y1ho5")
@@ -36,6 +43,7 @@ shader_parameter/noise_scroll_direction = Vector2(1, 0)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_po6bg"]
 gradient = SubResource("Gradient_snvpx")
+width = 1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8kf8t"]
 shader = ExtResource("4_gsxbt")
@@ -204,6 +212,7 @@ animations = [{
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_b7alc")
+colors_cycle = SubResource("GradientTexture1D_s38cj")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.3, 1)
@@ -216,9 +225,10 @@ texture = SubResource("GradientTexture1D_ljq0m")
 centered = false
 
 [node name="Fog" type="Sprite2D" parent="ParallaxBackground"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_cfxj5")
 position = Vector2(960, 539.75)
-scale = Vector2(7.5, 1080.5)
+scale = Vector2(1994, 1080.5)
 texture = SubResource("GradientTexture1D_po6bg")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -242,7 +252,8 @@ centered = false
 
 [node name="GameRules" type="Node2D" parent="."]
 script = ExtResource("5_birrg")
-speed = Vector2(-500, 0)
+time_s_before_increase_speed = 2
+start_speed = Vector2(-500, 0)
 speed_increase = Vector2(-10, 0)
 gravity = Vector2(0, 3000)
 colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 0, 1)])
@@ -274,19 +285,40 @@ position = Vector2(0, 962)
 
 [node name="Platform" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
 physics_material_override = ExtResource("10_1qxda")
-platform_type = ""
 
 [node name="Platform2" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-position = Vector2(629, 0)
+position = Vector2(1262, 0)
 physics_material_override = ExtResource("10_1qxda")
-platform_type = "Blue"
 
 [node name="Platform3" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-position = Vector2(1258, 0)
+position = Vector2(2522, 0)
 physics_material_override = ExtResource("10_1qxda")
-platform_type = "Yellow"
 
 [node name="Platform4" parent="PlatformSpawner/Platforms" instance=ExtResource("7_r4dv3")]
-position = Vector2(1887, 0)
+position = Vector2(3783, 0)
 physics_material_override = ExtResource("10_1qxda")
-platform_type = "Green"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HUD" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/HUD"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.052
+anchor_right = 1.0
+anchor_bottom = 0.235
+offset_top = -0.16
+offset_bottom = 0.199982
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(960, 99)
+bbcode_enabled = true
+text = "0"
+scroll_active = false

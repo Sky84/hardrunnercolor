@@ -6,13 +6,6 @@ extends Node2D
 @export var platforms: Array[AnimatableBody2D];
 var _obstacles: Array[AnimatableBody2D];
 
-var PLATFORM_TYPE = [
-	'Red',
-	'Blue',
-	'Yellow',
-	'Green'
-]
-
 func _physics_process(delta):
 	for platform in platforms:
 		platform.global_position.x += game_rules.speed.x * delta;
@@ -30,8 +23,8 @@ func _physics_process(delta):
 			_obstacles.erase(obstacle);
 
 func _on_platform_replaced(_platform: AnimatableBody2D):
-	_platform.platform_type = PLATFORM_TYPE[randi() % PLATFORM_TYPE.size()];
-	var _with_obstacle = randi_range(0, 2) == 0;
+	_platform.platform_type = game_rules.get_next_platform_type();
+	var _with_obstacle = game_rules.is_obstacle_spawnable();
 	if _with_obstacle:
 		var _obstacle_scene = obstacles_scenes[randi() % obstacles_scenes.size()];
 		var _obstacle_instance = _obstacle_scene.instantiate();

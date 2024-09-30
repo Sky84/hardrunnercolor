@@ -12,6 +12,12 @@ var want_change_color: bool = false;
 
 var current_color: Color;
 
+var speed_animation: float:
+	get:
+		return game_rules.speed.x / game_rules.start_speed.x;
+
+signal score_should_increase;
+
 func _process(delta: float) -> void:
 	position.x = start_position.x;
 
@@ -36,3 +42,6 @@ func _input(event: InputEvent) -> void:
 	 or event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		if is_on_floor():
 			_want_jump = true;
+
+func on_score_should_increase():
+	score_should_increase.emit();
