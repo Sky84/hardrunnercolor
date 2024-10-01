@@ -23,9 +23,7 @@ var player_score: int = 0;
 	5000: [colors[0], colors[1], colors[2], colors[3]]
 }
 
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
+func start_game() -> void:
 	speed = start_speed;
 	var _timer = Timer.new();
 	_timer.wait_time = time_s_before_increase_speed;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=62 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -7,23 +7,20 @@
 [ext_resource type="Shader" path="res://bloom.gdshader" id="4_gsxbt"]
 [ext_resource type="Script" path="res://GameRules.gd" id="5_birrg"]
 [ext_resource type="Script" path="res://PlatformSpawner.gd" id="6_vnohe"]
+[ext_resource type="Texture2D" uid="uid://bc08jm6j83drk" path="res://Assets/Players/SimpleCharacter/TeleporterActivate.png" id="6_vntt5"]
+[ext_resource type="Texture2D" uid="uid://b4wau2pkbnog3" path="res://Assets/Players/SimpleCharacter/TeleporterIdle.png" id="7_b0vaa"]
 [ext_resource type="Texture2D" uid="uid://by0cje77m7h1p" path="res://Assets/Players/SimpleCharacter/PlayerSheet.png" id="7_fgkuc"]
 [ext_resource type="Script" path="res://simple_character.gd" id="7_p77bl"]
 [ext_resource type="Shader" path="res://player_color.gdshader" id="7_r0aca"]
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="10_1qxda"]
-
-[sub_resource type="Gradient" id="Gradient_wht7d"]
-offsets = PackedFloat32Array(0, 0.136905, 0.303571, 0.488095, 0.595238, 0.732143, 0.892857, 1)
-colors = PackedColorArray(0, 0.364706, 1, 1, 0.418063, 0.621324, 1, 1, 0.850754, 0.889904, 0.862696, 1, 0.974512, 0.628761, 3.85046e-07, 1, 0.917179, 0, 0.266607, 1, 0, 0.0218256, 0.070755, 1, 0, 0.0235294, 0.0705882, 1, 0, 0.364706, 1, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_s38cj"]
-gradient = SubResource("Gradient_wht7d")
+[ext_resource type="Script" path="res://main_menu_panel.gd" id="14_m4l05"]
+[ext_resource type="Script" path="res://main_menu_button.gd" id="17_ag7ok"]
 
 [sub_resource type="Gradient" id="Gradient_y1ho5"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
+colors = PackedColorArray(0, 0.25098, 0.729412, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_ljq0m"]
 gradient = SubResource("Gradient_y1ho5")
@@ -208,11 +205,121 @@ animations = [{
 "speed": 11.0
 }]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_vyojk"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_aio2j"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xattj"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lbcjp"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qf1ma"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_y0jrm"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lqd7g"]
+atlas = ExtResource("6_vntt5")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_66baw"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tsjyu"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b7uyc"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jvrkv"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0wlw1"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m2anp"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_i0drq"]
+atlas = ExtResource("7_b0vaa")
+region = Rect2(384, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_p7qxw"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vyojk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_aio2j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xattj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lbcjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qf1ma")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_y0jrm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lqd7g")
+}],
+"loop": true,
+"name": &"activated",
+"speed": 6.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_66baw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tsjyu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b7uyc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jvrkv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0wlw1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m2anp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_i0drq")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 6.0
+}]
+
 [node name="Game" type="Node2D"]
 
 [node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 script = ExtResource("1_b7alc")
-colors_cycle = SubResource("GradientTexture1D_s38cj")
 
 [node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_scale = Vector2(0.3, 1)
@@ -298,6 +405,13 @@ physics_material_override = ExtResource("10_1qxda")
 position = Vector2(3783, 0)
 physics_material_override = ExtResource("10_1qxda")
 
+[node name="TeleporterAnimated" type="AnimatedSprite2D" parent="."]
+position = Vector2(315, 821)
+scale = Vector2(4.5, 4.5)
+sprite_frames = SubResource("SpriteFrames_p7qxw")
+animation = &"idle"
+frame_progress = 0.436648
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" type="Control" parent="CanvasLayer"]
@@ -322,3 +436,112 @@ pivot_offset = Vector2(960, 99)
 bbcode_enabled = true
 text = "0"
 scroll_active = false
+
+[node name="MainMenuPanel" type="Panel" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("14_m4l05")
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.006
+anchor_right = 1.0
+anchor_bottom = 0.125
+offset_top = -0.48
+grow_horizontal = 2
+grow_vertical = 2
+text = "HARD RUNNER COLOR"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="HFlowContainer" type="HFlowContainer" parent="CanvasLayer/MainMenuPanel"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.093
+anchor_top = 0.13
+anchor_right = 0.907
+anchor_bottom = 0.87
+offset_left = -0.559998
+offset_top = -0.400009
+offset_right = 0.559814
+offset_bottom = 0.399902
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(782, 407)
+alignment = 1
+
+[node name="InfiniteModeButton" type="Button" parent="CanvasLayer/MainMenuPanel/HFlowContainer"]
+custom_minimum_size = Vector2(292, 814)
+layout_mode = 2
+text = "Infinite Mode"
+script = ExtResource("17_ag7ok")
+id = "infinite"
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuPanel/HFlowContainer/InfiniteModeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 20.5
+offset_right = 20.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tap to confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AdventureModeButton" type="Button" parent="CanvasLayer/MainMenuPanel/HFlowContainer"]
+custom_minimum_size = Vector2(292, 814)
+layout_mode = 2
+text = "Adventure Mode"
+script = ExtResource("17_ag7ok")
+id = "adventure"
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuPanel/HFlowContainer/AdventureModeButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 20.5
+offset_right = 20.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tap to confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ParametersButton" type="Button" parent="CanvasLayer/MainMenuPanel/HFlowContainer"]
+custom_minimum_size = Vector2(292, 814)
+layout_mode = 2
+text = "Parameters"
+script = ExtResource("17_ag7ok")
+id = "parameters"
+
+[node name="Label" type="Label" parent="CanvasLayer/MainMenuPanel/HFlowContainer/ParametersButton"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = 20.5
+offset_right = 20.0
+offset_bottom = 43.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "Tap to confirm"
+horizontal_alignment = 1
+vertical_alignment = 1
