@@ -1,12 +1,14 @@
 extends Node2D
 class_name GameRules
 
+@export var score_before_optional_platform_spawns: int = 0;
 @export var score_before_obstacle_spawns: int = 15000;
 @export var time_s_before_increase_speed: int = 1;
 @export var start_speed: Vector2;
 @export var speed_increase: Vector2;
 @export var gravity: Vector2;
 @export var colors: Array[Color];
+@export var animated_teleporter: AnimatedSprite2D;
 @onready var score_rich_text_label: RichTextLabel = $"../CanvasLayer/HUD/RichTextLabel"
 const score_rich_text_base: String = "[center][font_size=128]{score}[/font_size][/center]";
 
@@ -23,7 +25,14 @@ var player_score: int = 0;
 	5000: [colors[0], colors[1], colors[2], colors[3]]
 }
 
+func _ready() -> void:
+	animated_teleporter.play("idle");
+	MenuEventsBus.on_infinite_button_clicked.connect(start_game);
+
 func start_game() -> void:
+	animated_teleporter.play("activated");
+	await animated_teleporter.animation_finished;
+	animated_teleporter.visible = false;
 	speed = start_speed;
 	var _timer = Timer.new();
 	_timer.wait_time = time_s_before_increase_speed;
@@ -31,6 +40,7 @@ func start_game() -> void:
 	add_child(_timer);
 	_timer.timeout.connect(_on_timer_timeout);
 	player.score_should_increase.connect(_on_increase_score);
+	player.on_first_play();
 
 func _on_timer_timeout():
 	speed += speed_increase;
@@ -54,3 +64,6 @@ func get_next_platform_type() -> Color:
 
 func is_obstacle_spawnable() -> bool:
 	return player_score >= score_before_obstacle_spawns and randi_range(0, 2) == 0;
+
+func is_optional_platform_spawnable() -> bool:
+	return player_score >= score_before_optional_platform_spawns and randi_range(0, 2) == 0;

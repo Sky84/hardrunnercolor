@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://qt3si1sjq3dw"]
+[gd_scene load_steps=70 format=3 uid="uid://qt3si1sjq3dw"]
 
 [ext_resource type="Script" path="res://ParallaxBackground.gd" id="1_b7alc"]
 [ext_resource type="Texture2D" uid="uid://crx2dhspo4v45" path="res://Assets/Backgrounds/background1.png" id="2_2tqrj"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://cwomi1d1tdxqo" path="res://platform.tscn" id="7_r4dv3"]
 [ext_resource type="PackedScene" uid="uid://n1mb8ltok4i6" path="res://Obstacle.tscn" id="8_yycuc"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="10_1qxda"]
+[ext_resource type="PackedScene" uid="uid://ccqgow0va6573" path="res://MobilePlatform.tscn" id="12_du01u"]
 [ext_resource type="Script" path="res://main_menu_panel.gd" id="14_m4l05"]
 [ext_resource type="Script" path="res://main_menu_button.gd" id="17_ag7ok"]
 
@@ -91,6 +92,34 @@ region = Rect2(576, 252, 96, 84)
 atlas = ExtResource("7_fgkuc")
 region = Rect2(672, 252, 96, 84)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_2hfll"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(0, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_q4yp8"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(96, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_psolw"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(192, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_38pnr"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(288, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4b5d5"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(384, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1jf1x"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(480, 84, 96, 84)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3ah0f"]
+atlas = ExtResource("7_fgkuc")
+region = Rect2(576, 84, 96, 84)
+
 [sub_resource type="AtlasTexture" id="AtlasTexture_27lho"]
 atlas = ExtResource("7_fgkuc")
 region = Rect2(0, 1596, 96, 84)
@@ -165,6 +194,32 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2hfll")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_q4yp8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_psolw")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_38pnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_4b5d5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1jf1x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3ah0f")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 10.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -285,7 +340,7 @@ animations = [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_lqd7g")
 }],
-"loop": true,
+"loop": false,
 "name": &"activated",
 "speed": 6.0
 }, {
@@ -334,8 +389,8 @@ centered = false
 [node name="Fog" type="Sprite2D" parent="ParallaxBackground"]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_cfxj5")
-position = Vector2(960, 539.75)
-scale = Vector2(1994, 1080.5)
+position = Vector2(961, 529)
+scale = Vector2(1992, 1158)
 texture = SubResource("GradientTexture1D_po6bg")
 
 [node name="ParallaxLayer2" type="ParallaxLayer" parent="ParallaxBackground"]
@@ -357,13 +412,14 @@ material = SubResource("ShaderMaterial_8kf8t")
 texture = ExtResource("3_lxvm8")
 centered = false
 
-[node name="GameRules" type="Node2D" parent="."]
+[node name="GameRules" type="Node2D" parent="." node_paths=PackedStringArray("animated_teleporter")]
 script = ExtResource("5_birrg")
 time_s_before_increase_speed = 2
 start_speed = Vector2(-500, 0)
 speed_increase = Vector2(-10, 0)
 gravity = Vector2(0, 3000)
 colors = Array[Color]([Color(1, 0, 0, 1), Color(0, 0, 1, 1), Color(0, 1, 0, 1), Color(1, 1, 0, 1)])
+animated_teleporter = NodePath("../TeleporterAnimated")
 
 [node name="Player" type="CharacterBody2D" parent="."]
 texture_filter = 1
@@ -377,6 +433,8 @@ jump_force = 1200.0
 material = SubResource("ShaderMaterial_vpbo5")
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_nai62")
+animation = &"idle"
+frame_progress = 0.24501
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
 position = Vector2(7.5, 107)
@@ -385,6 +443,7 @@ shape = SubResource("RectangleShape2D_du0mu")
 [node name="PlatformSpawner" type="Node2D" parent="." node_paths=PackedStringArray("platforms")]
 script = ExtResource("6_vnohe")
 obstacles_scenes = Array[PackedScene]([ExtResource("8_yycuc")])
+optional_platforms_scenes = Array[PackedScene]([ExtResource("12_du01u")])
 platforms = [NodePath("Platforms/Platform"), NodePath("Platforms/Platform2"), NodePath("Platforms/Platform3"), NodePath("Platforms/Platform4")]
 
 [node name="Platforms" type="Node2D" parent="PlatformSpawner"]
@@ -405,12 +464,14 @@ physics_material_override = ExtResource("10_1qxda")
 position = Vector2(3783, 0)
 physics_material_override = ExtResource("10_1qxda")
 
+[node name="Objects" type="Node2D" parent="PlatformSpawner"]
+
 [node name="TeleporterAnimated" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
 position = Vector2(315, 821)
 scale = Vector2(4.5, 4.5)
 sprite_frames = SubResource("SpriteFrames_p7qxw")
-animation = &"idle"
-frame_progress = 0.436648
+animation = &"activated"
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://n1mb8ltok4i6"]
 
-[ext_resource type="Script" path="res://obstacle.gd" id="1_gipju"]
+[ext_resource type="Script" path="res://BaseObject.gd" id="1_gipju"]
 [ext_resource type="PhysicsMaterial" uid="uid://cl1j5u4jr1fyq" path="res://platform_physics_material.tres" id="1_k8mah"]
 [ext_resource type="Texture2D" uid="uid://bbfjho42bvy37" path="res://Assets/Obstacles/CrateIdle.png" id="3_7uknn"]
 [ext_resource type="Texture2D" uid="uid://chyjn6mptdkyu" path="res://Assets/Obstacles/LaserActivatedBaseBottom.png" id="3_nin25"]

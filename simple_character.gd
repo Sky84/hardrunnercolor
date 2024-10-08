@@ -7,9 +7,15 @@ extends Player
 
 var _current_color_index: int = 0;
 
-func _ready() -> void:
+func on_first_play() -> void:
+	super();
+	set_physics_process(true);
 	_play_animation("default");
 	animated_sprite_2d.animation_looped.connect(on_score_should_increase);
+
+func _ready() -> void:
+	set_physics_process(false);
+	_play_animation("idle", 1);
 	
 func _physics_process(delta: float) -> void:
 	super(delta);
@@ -27,5 +33,5 @@ func _physics_process(delta: float) -> void:
 	# set the current color to shader parameter
 	animated_sprite_2d.material.set_shader_parameter("current_color", current_color);
 
-func _play_animation(animation_name: String):
-	animated_sprite_2d.play(animation_name, speed_animation);
+func _play_animation(animation_name: String, forced_speed_animation: float = 0.0) -> void:
+	animated_sprite_2d.play(animation_name, forced_speed_animation || speed_animation);

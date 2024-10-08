@@ -1,5 +1,6 @@
 extends Panel
 
+
 @onready var buttons_container: HFlowContainer = $HFlowContainer;
 
 var _last_pressed_id: String;
@@ -10,7 +11,6 @@ func _ready() -> void:
 		child.pivot_offset = child.size / 2;
 		child.get_child(0).modulate.a = 0;
 		child.pressed.connect(_on_child_pressed.bind(child))
-
 
 func _on_child_pressed(child: MainMenuButton) -> void:
 	# expand the child and reduce the size of the other childs
@@ -33,3 +33,4 @@ func _on_confirm_pressed(button_id: String):
 		"infinite":
 			var tween = get_tree().create_tween().set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT);
 			tween.tween_property(self, "modulate:a", 0, 0.2);
+			MenuEventsBus.on_infinite_button_clicked.emit();

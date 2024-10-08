@@ -33,6 +33,9 @@ func _physics_process(delta):
 	velocity.x = 0;
 	
 	move_and_slide();
+	
+	if get_platform_velocity().y != 0:
+		apply_floor_snap();
 
 func _input(event: InputEvent) -> void:
 	if (event is InputEventScreenTouch or event is InputEventMouseButton) and event.is_pressed():
@@ -42,6 +45,9 @@ func _input(event: InputEvent) -> void:
 	 or event is InputEventKey and event.pressed and event.keycode == KEY_SPACE:
 		if is_on_floor():
 			_want_jump = true;
+
+func on_first_play():
+	pass
 
 func on_score_should_increase():
 	score_should_increase.emit();

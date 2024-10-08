@@ -1,0 +1,2 @@
+extends Node
+signal on_infinite_button_clicked;
